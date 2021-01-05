@@ -42,7 +42,6 @@ function HomePage (props) {
       .then((response) => response.json())
       .then((data) => {
         setTeams(data.league.standard)
-        console.log(data.league.standard)
       })
       .catch((err) => {
         console.log(err)
@@ -67,13 +66,11 @@ function HomePage (props) {
 
   function renderTeam (player, teams) {
     let renderedTeam = {}
-
     teams.forEach(team => {
       if (player.teamId === team.teamId) {
         renderedTeam = team
       }
     })
-
     return renderedTeam
   }
 

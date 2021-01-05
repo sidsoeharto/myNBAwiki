@@ -86,8 +86,9 @@ class Navbar extends Component {
           <Typography variant="h6" className={classes.title} variant="h6" noWrap>
             NBAWiki
           </Typography>
-          <Button color="inherit">All Players</Button>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" className={classes.menuButton}>All Players</Button>
+          <Button color="inherit" className={classes.menuButton}>Players by Team</Button>
+          <Button color="inherit" className={classes.menuButton}>Favorite Players</Button>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

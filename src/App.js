@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar'
 import HomePage from './views/HomePage'
+import DetailPage from './views/DetailPage';
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
       <header className="App-header">
         <Navbar />
         <HomePage />
+        <DetailPage />
       </header>
     </div>
   );
