@@ -74,11 +74,15 @@ function HomePage (props) {
     return renderedTeam
   }
 
+  function handleClickPlayer (data) {
+    props.handleClickPlayer(data)
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
       <Grid container spacing={3}>
-        {currentPlayers.map(player => <Grid item xs={3}><PlayerCard key={player.personId} player={player} team={renderTeam(player, teams)}/></Grid>)}
+        {currentPlayers.map(player => <Grid item xs={3}><PlayerCard key={player.personId} player={player} team={renderTeam(player, teams)} handleClickPlayer={handleClickPlayer}/></Grid>)}
       </Grid>
       <Pagination count={50} page={currentPage} onChange={handleChange} />
     </React.Fragment>

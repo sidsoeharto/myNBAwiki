@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core'
 
 function PlayerCard (props) {
+  let history = useHistory()
   
   function handleClick (data, e) {
-    console.log(data)
+    props.handleClickPlayer(data)
+    history.push({
+      pathname:`/player/${data.personId}`,
+      state: {player: data}
+    })
   }
 
   return (
