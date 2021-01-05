@@ -8,31 +8,33 @@ import TeamPage from './views/TeamPage';
 
 function App() {
   const [players, setPlayers] = React.useState([])
+  const [team, setTeam] = React.useState([])
 
-  function handleClickPlayer (data) {
-    setPlayers(data)
+  function handleClickPlayer (dataPlayer, dataTeam) {
+    setPlayers(dataPlayer)
+    setTeam(dataTeam)
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar />
-          <Router>
-            <Switch>
-              <Route path="/" exact>
-                <HomePage handleClickPlayer={handleClickPlayer}/>
-              </Route>
-              <Route path="/players/:teamId" exact>
-                <TeamPage />
-              </Route>
-              <Route path="/player/:id">
-                <DetailPage players={players}/>
-              </Route>
-              <Route path="/favorites">
-                <FavoritesPage />
-              </Route>
-            </Switch>
-          </Router>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact>
+              <HomePage handleClickPlayer={handleClickPlayer}/>
+            </Route>
+            <Route path="/players/:teamId" exact>
+              <TeamPage />
+            </Route>
+            <Route path="/player/:id">
+              <DetailPage players={players} team={team}/>
+            </Route>
+            <Route path="/favorites">
+              <FavoritesPage />
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );

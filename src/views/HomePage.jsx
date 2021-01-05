@@ -74,8 +74,8 @@ function HomePage (props) {
     return renderedTeam
   }
 
-  function handleClickPlayer (data) {
-    props.handleClickPlayer(data)
+  function handleClickPlayer (dataPlayer, dataTeam) {
+    props.handleClickPlayer(dataPlayer, dataTeam)
   }
 
   return (

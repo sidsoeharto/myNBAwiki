@@ -7,11 +7,10 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typo
 function PlayerCard (props) {
   let history = useHistory()
   
-  function handleClick (data, e) {
-    props.handleClickPlayer(data)
+  function handleClick (dataPlayer, dataTeam, e) {
+    props.handleClickPlayer(dataPlayer, dataTeam)
     history.push({
-      pathname:`/player/${data.personId}`,
-      state: {player: data}
+      pathname:`/player/${dataPlayer.personId}`,
     })
   }
 
@@ -41,7 +40,7 @@ function PlayerCard (props) {
         <Button size="small" color="primary">
           Favorite
         </Button>
-        <Button size="small" color="primary" id={props.player.personId} onClick={(e) => handleClick(props.player, e)}>
+        <Button size="small" color="primary" id={props.player.personId} onClick={(e) => handleClick(props.player, props.team, e)}>
           Learn More
         </Button>
       </CardActions>

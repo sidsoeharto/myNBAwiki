@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { fade, withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, Button, InputBase } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -86,7 +87,11 @@ class Navbar extends Component {
           <Typography variant="h6" className={classes.title} variant="h6" noWrap>
             NBAWiki
           </Typography>
-          <Button color="inherit" className={classes.menuButton}>All Players</Button>
+          <Button color="inherit" className={classes.menuButton}>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              All Players
+            </Link>
+          </Button>
           <Button color="inherit" className={classes.menuButton}>Players by Team</Button>
           <Button color="inherit" className={classes.menuButton}>Favorite Players</Button>
           <div className={classes.search}>
