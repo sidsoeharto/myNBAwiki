@@ -10,8 +10,8 @@ export function setPlayerTeam () {
   return { type: "SET_PLAYER_TEAM" }
 }
 
-export function addFavorite () {
-  return { type: "ADD_FAVORITE" }
+export function addFavorite (player) {
+  return { type: "ADD_FAVORITE", payload: player }
 }
 
 export function removeFavorite () {

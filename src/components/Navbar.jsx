@@ -93,7 +93,11 @@ class Navbar extends Component {
             </Link>
           </Button>
           <Button color="inherit" className={classes.menuButton}>Players by Team</Button>
-          <Button color="inherit" className={classes.menuButton}>Favorite Players</Button>
+          <Button color="inherit" className={classes.menuButton}>
+            <Link to="/favorites" style={{ textDecoration: 'none' }}>
+              Favorite Players
+            </Link>
+          </Button>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
