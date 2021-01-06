@@ -1,6 +1,9 @@
 import React from 'react';
 import PlayerDetailCard from '../components/PlayerDetailCard';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPlayer } from '../store/actions'
+
 import { Grid, Container, Paper, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import PlayerStats from '../components/PlayerStats';
@@ -39,13 +42,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function DetailPage (props) {
-  const [player, setPlayer] = React.useState(props.players)
-  const [team, setTeam] = React.useState(props.team)
+  const dispatch = useDispatch()
   const [playerData, setPlayerData] = React.useState({})
   const [playerDataRegular, setPlayerDataRegular] = React.useState([])
   const [playerDataLatest, setPlayerDataLatest] = React.useState({})
   let { id } = useParams()
   const classes = useStyles()
+
+  React.useEffect(() => {
+    console.log(id)
+    dispatch(setPlayer(id))
+  }, [])
+
+  const player = useSelector(state => state.player)
 
   const today = moment()
 
@@ -89,13 +98,13 @@ function DetailPage (props) {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <Card class={classes.playerDetailCard}>
+          <Card className={classes.playerDetailCard}>
             <CardContent>
               <Typography gutterBottom variant="h4" component="h3" align="center">
                 {player.firstName + ' ' + player.lastName}
               </Typography>
               <Typography variant="h6" color="textSecondary" component="h6" align="center">
-                {team.fullName} | #{player.jersey} | {player.teamSitesOnly.posFull}
+                {/* {team.fullName} | #{player.jersey} | {player.teamSitesOnly.posFull} */}
               </Typography>
             </CardContent>
             <CardMedia
@@ -180,7 +189,7 @@ function DetailPage (props) {
           </Grid>
         </Grid>
         <Container>
-          <img src={`https://www.nba.com/stats/media/img/teams/logos/${team.tricode}_logo.svg`}/>
+          {/* <img src={`https://www.nba.com/stats/media/img/teams/logos/${team.tricode}_logo.svg`}/> */}
           <TableContainer>
             <Table>
               <TableHead>

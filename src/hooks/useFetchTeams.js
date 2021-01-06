@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-function useFetchPlayers(url) {
-  const [players, setPlayers] = useState([])
+function useFetchTeams(url) {
+  const [teams, setTeams] = useState([])
   const template = require('nba-client-template')
   const options = {
     headers: {
@@ -20,14 +20,14 @@ function useFetchPlayers(url) {
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
-        setPlayers(data.league.standard)
+        setTeams(data.league.standard)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [url])
 
-  return [players, setPlayers]
+  return [teams, setTeams]
 }
 
-export default useFetchPlayers
+export default useFetchTeams

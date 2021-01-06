@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
 
 const initialState = {
+  players: [],
   player: {},
   teams: [],
   playerTeam: {},
@@ -9,8 +10,10 @@ const initialState = {
 
 function reducer ( state = initialState, action ) {
   switch(action.type) {
+    case "SET_PLAYERS":
+      return {...state, players: action.payload }
     case "SET_PLAYER": 
-      return {...state, player: action.payload }
+      return {...state, player: state.players.find(player => player.personId === action.payload)}
     case "SET_TEAMS": 
       return {...state, teams: action.payload }
     case "SET_PLAYER_TEAM":

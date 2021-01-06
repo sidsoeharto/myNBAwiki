@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { setPlayers } from '../store/actions.js'
 
 function useFetchPlayers(url) {
-  const [teams, setTeams] = useState([])
+  const players = useSelector(state => state.players)
+  const dispatch = useDispatch()
+
   const template = require('nba-client-template')
   const options = {
     headers: {
@@ -20,14 +24,14 @@ function useFetchPlayers(url) {
     fetch(url, options)
       .then((response) => response.json())
       .then((data) => {
-        setTeams(data.league.standard)
+        dispatch(setPlayers(data.league.standard))
       })
       .catch((err) => {
         console.log(err)
       })
   }, [url])
 
-  return [teams, setTeams]
+  return [players]
 }
 
 export default useFetchPlayers

@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux';
-import { addFavorite } from '../store/actions'
+import { setPlayer, setTeam } from '../store/actions';
+import { addFavorite } from '../store/actions';
 
 function PlayerCard (props) {
   let history = useHistory()
 
   const dispatch = useDispatch()
   
-  function handleClick (dataPlayer, dataTeam, e) {
-    props.handleClickPlayer(dataPlayer, dataTeam)
+  function handleClick (playerId, e) {
+    dispatch(setPlayer(playerId))
     history.push({
-      pathname:`/player/${dataPlayer.personId}`,
+      pathname:`/player/${playerId}`,
     })
   }
 
@@ -47,7 +48,7 @@ function PlayerCard (props) {
         <Button size="small" color="primary" onClick={() => clickToAdd(props.player)}>
           Favorite
         </Button>
-        <Button size="small" color="primary" id={props.player.personId} onClick={(e) => handleClick(props.player, props.team, e)}>
+        <Button size="small" color="primary" id={props.player.personId} onClick={(e) => handleClick(props.player.personId, e)}>
           Learn More
         </Button>
       </CardActions>

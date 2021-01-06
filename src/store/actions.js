@@ -1,5 +1,9 @@
-export function setPlayer () {
-  return { type: "SET_PLAYER" }
+export function setPlayers (payload) {
+  return { type: "SET_PLAYERS", payload: payload }
+}
+
+export function setPlayer (payload) {
+  return { type: "SET_PLAYER", payload: payload }
 }
 
 export function setTeams () {
