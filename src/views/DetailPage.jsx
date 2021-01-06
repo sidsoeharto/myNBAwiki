@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Grid, Container, Paper, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import PlayerStats from '../components/PlayerStats';
-import { Table } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { Avatar, Card, CardMedia, CardHeader, CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
@@ -41,11 +41,17 @@ const useStyles = makeStyles((theme) => ({
 function DetailPage (props) {
   const [player, setPlayer] = React.useState(props.players)
   const [team, setTeam] = React.useState(props.team)
-  const [playerData, setPlayerData] = React.useState([])
+  const [playerData, setPlayerData] = React.useState({})
+  const [playerDataRegular, setPlayerDataRegular] = React.useState([])
+  const [playerDataLatest, setPlayerDataLatest] = React.useState({})
   let { id } = useParams()
   const classes = useStyles()
 
   const today = moment()
+
+  // let dataLatest = playerData.latest
+  // let dataSummary = playerData.careerSummary
+  // let dataRegular = playerData.regularSeason
 
   function fetchPlayerData () {
     const playerDataUrl = `http://data.nba.net/data/10s/prod/v1/2020/players/${id}_profile.json`
@@ -66,6 +72,9 @@ function DetailPage (props) {
       .then((response) => response.json())
       .then((data) => {
         setPlayerData(data.league.standard.stats)
+        setPlayerDataRegular(data.league.standard.stats.regularSeason.season)
+        console.log(data.league.standard.stats.regularSeason.season)
+        setPlayerDataLatest(data.league.standard.stats.latest)
       })
       .catch((err) => {
         console.log(err)
@@ -171,7 +180,54 @@ function DetailPage (props) {
           </Grid>
         </Grid>
         <Container>
-          {JSON.stringify(playerData)}
+          <img src={`https://www.nba.com/stats/media/img/teams/logos/${team.tricode}_logo.svg`}/>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>SEASON</TableCell>
+                  <TableCell>TEAM</TableCell>
+                  <TableCell>GP</TableCell>
+                  <TableCell>MIN</TableCell>
+                  <TableCell>PTS</TableCell>
+                  <TableCell>FGM</TableCell>
+                  <TableCell>FGA</TableCell>
+                  <TableCell>FG%</TableCell>
+                  <TableCell>3PM</TableCell>
+                  <TableCell>3PA</TableCell>
+                  <TableCell>3P%</TableCell>
+                  <TableCell>FTM</TableCell>
+                  <TableCell>FTA</TableCell>
+                  <TableCell>FT%</TableCell>
+                  <TableCell>OREB</TableCell>
+                  <TableCell>DREB</TableCell>
+                  <TableCell>REB</TableCell>
+                  <TableCell>AST</TableCell>
+                  <TableCell>TOV</TableCell>
+                  <TableCell>STL</TableCell>
+                  <TableCell>BLK</TableCell>
+                  <TableCell>PF</TableCell>
+                  <TableCell>FP</TableCell>
+                  <TableCell>DD2</TableCell>
+                  <TableCell>TD3</TableCell>
+                  <TableCell>+/-</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {playerDataRegular.map((data) => (
+                  data.teams.forEach(season => {
+                    <TableRow key={data.seasonYear}>
+                      <TableCell>{season.ppg}</TableCell>
+                      <TableCell>MIN</TableCell>
+                      <TableCell>{playerData.latest.ppg}</TableCell>
+                      <TableCell>FGM</TableCell>
+                      <TableCell>FGA</TableCell>
+                    </TableRow>
+                  })
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Container>
       </Grid>
     </div>
