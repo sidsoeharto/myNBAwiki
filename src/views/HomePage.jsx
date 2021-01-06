@@ -38,7 +38,6 @@ function HomePage (props) {
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <Grid container spacing={3}>
         {currentPlayers.map(player => <Grid item xs={3}><PlayerCard key={player.personId} player={player} team={renderTeam(player, teams)} handleClickPlayer={handleClickPlayer}/></Grid>)}
       </Grid>

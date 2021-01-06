@@ -1,5 +1,7 @@
 import React from 'react';
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
+import PlayerCardFavorite from '../components/PlayerCardFavorite'
+import Grid from '@material-ui/core/Grid';
 
 function FavoritesPage () {
 
@@ -7,9 +9,11 @@ function FavoritesPage () {
   
   return(
     <div>
-      {
-        favorites.map(favorite => <div>{JSON.stringify(favorite)}</div>) 
-      }
+      <Grid container spacing={3}>
+        {
+          favorites.map(favorite => <Grid item xs={3}><PlayerCardFavorite key={favorite.personId} favorite={favorite}></PlayerCardFavorite></Grid>) 
+        }
+      </Grid>
     </div>
   )
 }
