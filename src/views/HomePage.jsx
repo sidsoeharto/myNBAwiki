@@ -4,49 +4,15 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Pagination from '@material-ui/lab/Pagination';
 import PlayerCard from '../components/PlayerCard';
+import useFetchPlayers from '../hooks/useFetchPlayers';
+import useFetchTeams from '../hooks/useFetchTeams';
 
 function HomePage (props) {
-  const [players, setPlayers] = React.useState([])
-  const [teams, setTeams] = React.useState([])
   const [currentPage, setCurrentPage] = React.useState(1)
   const [playersPerPage, setPlayersPerPage] = React.useState(12)
 
-  function fetchPlayers () {
-    const playerUrl = 'http://data.nba.net/data/10s/prod/v1/2020/players.json';
-    fetch(playerUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setPlayers(data.league.standard)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  function fetchTeams () {
-    const teamsUrl = 'http://data.nba.net/data/10s/prod/v1/2020/teams.json';
-    const template = require('nba-client-template')
-    const options = {
-      headers: {
-        "Accept-Encoding": "gzip, deflate",
-        "Accept-Language": "en-US",
-        Accept: "*/*",
-        "User-Agent": template.user_agent,
-        Referer: template.referrer,
-        Connection: "keep-alive",
-        "Cache-Control": "no-cache",
-        Origin: "http://stats.nba.com",
-      }
-    }
-    fetch(teamsUrl, options)
-      .then((response) => response.json())
-      .then((data) => {
-        setTeams(data.league.standard)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  const [players] = useFetchPlayers('http://data.nba.net/data/10s/prod/v1/2020/players.json')
+  const [teams] = useFetchTeams('http://data.nba.net/data/10s/prod/v1/2020/teams.json')
 
   const indexOfLastPlayer = currentPage * playersPerPage;
   const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
@@ -55,14 +21,6 @@ function HomePage (props) {
   const handleChange = (event, value) => {
     setCurrentPage(Number(value))
   }
-
-  React.useEffect(() => {
-    fetchPlayers();
-  } ,[])
-
-  React.useEffect(() => {
-    fetchTeams();
-  }, [])
 
   function renderTeam (player, teams) {
     let renderedTeam = {}
