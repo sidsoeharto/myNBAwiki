@@ -1,14 +1,6 @@
 import React from 'react';
 import PlayerDetailCard from '../components/PlayerDetailCard';
 import { useParams } from 'react-router-dom';
-<<<<<<< HEAD
-import { Grid, Container, Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
-import PlayerStats from '../components/PlayerStats';
-import { Table } from '@material-ui/core';
-import { Avatar, Card, CardMedia, CardHeader, CardContent } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-=======
 import { Grid, Container, Paper, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import PlayerStats from '../components/PlayerStats';
@@ -16,7 +8,6 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import { Avatar, Card, CardMedia, CardHeader, CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
->>>>>>> 6838fc362d924c15faf353ac4d6349c1754be558
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +15,6 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     '& > *': {
       margin: theme.spacing(0),
-<<<<<<< HEAD
-      width: theme.spacing(22),
-      height: theme.spacing(22),
-    },
-  },
-=======
       width: theme.spacing(24),
       height: theme.spacing(24),
     },
@@ -51,17 +36,11 @@ const useStyles = makeStyles((theme) => ({
     border: 1,
     borderColor: 'text.secondary'
   }
->>>>>>> 6838fc362d924c15faf353ac4d6349c1754be558
 }));
 
 function DetailPage (props) {
   const [player, setPlayer] = React.useState(props.players)
   const [team, setTeam] = React.useState(props.team)
-<<<<<<< HEAD
-  const [playerData, setPlayerData] = React.useState([])
-  let { id } = useParams()
-  const classes = useStyles()
-=======
   const [playerData, setPlayerData] = React.useState({})
   const [playerDataRegular, setPlayerDataRegular] = React.useState([])
   const [playerDataLatest, setPlayerDataLatest] = React.useState({})
@@ -73,7 +52,6 @@ function DetailPage (props) {
   // let dataLatest = playerData.latest
   // let dataSummary = playerData.careerSummary
   // let dataRegular = playerData.regularSeason
->>>>>>> 6838fc362d924c15faf353ac4d6349c1754be558
 
   function fetchPlayerData () {
     const playerDataUrl = `http://data.nba.net/data/10s/prod/v1/2020/players/${id}_profile.json`
@@ -94,12 +72,9 @@ function DetailPage (props) {
       .then((response) => response.json())
       .then((data) => {
         setPlayerData(data.league.standard.stats)
-<<<<<<< HEAD
-=======
         setPlayerDataRegular(data.league.standard.stats.regularSeason.season)
         console.log(data.league.standard.stats.regularSeason.season)
         setPlayerDataLatest(data.league.standard.stats.latest)
->>>>>>> 6838fc362d924c15faf353ac4d6349c1754be558
       })
       .catch((err) => {
         console.log(err)
@@ -114,16 +89,7 @@ function DetailPage (props) {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={4}>
-<<<<<<< HEAD
-          <Card>
-            <CardMedia
-              image={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.personId}.png`}
-              style={{height: 260}}
-            >
-            </CardMedia>
-=======
           <Card class={classes.playerDetailCard}>
->>>>>>> 6838fc362d924c15faf353ac4d6349c1754be558
             <CardContent>
               <Typography gutterBottom variant="h4" component="h3" align="center">
                 {player.firstName + ' ' + player.lastName}
@@ -132,46 +98,15 @@ function DetailPage (props) {
                 {team.fullName} | #{player.jersey} | {player.teamSitesOnly.posFull}
               </Typography>
             </CardContent>
-<<<<<<< HEAD
-=======
             <CardMedia
               image={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.personId}.png`}
               style={{height: 260}}
             >
             </CardMedia>
->>>>>>> 6838fc362d924c15faf353ac4d6349c1754be558
           </Card>
         </Grid>
         <Grid container item xs={8}>
           <Grid item xs={3} className={classes.root}>
-<<<<<<< HEAD
-            <Paper>item</Paper>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Paper>item</Paper>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Paper>item</Paper>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Paper>item</Paper>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Paper>item</Paper>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Paper>item</Paper>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Paper>item</Paper>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Paper>item</Paper>
-          </Grid>
-        </Grid>
-        <Container>
-          {JSON.stringify(playerData)}
-=======
             <Card className={classes.paper}>
               <CardContent>
                 <Typography variant='h6' align="center" component="h3">Height:</Typography>
@@ -293,7 +228,6 @@ function DetailPage (props) {
               </TableBody>
             </Table>
           </TableContainer>
->>>>>>> 6838fc362d924c15faf353ac4d6349c1754be558
         </Container>
       </Grid>
     </div>
