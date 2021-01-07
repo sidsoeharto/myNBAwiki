@@ -27,7 +27,7 @@ function PlayerCardFavorite (props) {
           Jersey Number: {props.favorite.jersey}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {/* Team: {props.team.fullName} */}
+          Team: {props.team.fullName}
         </Typography>
       </CardContent>
       <CardActions>

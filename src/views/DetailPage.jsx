@@ -64,7 +64,7 @@ function DetailPage (props) {
   // let dataSummary = playerData.careerSummary
   // let dataRegular = playerData.regularSeason
 
-  function fetchPlayerData () {
+  function fetchPlayerData (id) {
     const playerDataUrl = `http://data.nba.net/data/10s/prod/v1/2020/players/${id}_profile.json`
     const template = require('nba-client-template')
     const options = {
