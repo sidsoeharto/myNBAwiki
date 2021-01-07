@@ -1,16 +1,16 @@
 import React from 'react';
-import PlayerDetailCard from '../components/PlayerDetailCard';
+import PlayerDetailPaper from '../components/PlayerDetailPaper';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPlayerData } from '../store/actions'
 
-import { Grid, Container, Paper, Divider } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
-import PlayerStats from '../components/PlayerStats';
+import { Grid, Container, Divider } from '@material-ui/core';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import { Avatar, Card, CardMedia, CardHeader, CardContent } from '@material-ui/core';
+import { Card, CardMedia, CardContent } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import moment from 'moment';
+
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,22 +30,13 @@ const useStyles = makeStyles((theme) => ({
     border: 2,
     borderColor: 'text.secondary'
   },
-  paperContent: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  playerDetailCard: {
-    borderRadius: "0%",
-    border: 1,
-    borderColor: 'text.secondary'
-  }
 }));
 
 function DetailPage (props) {
   const dispatch = useDispatch()
   let { id } = useParams()
-  const classes = useStyles()
   const playerDataUrl = `https://data.nba.net/data/10s/prod/v1/2020/players/${id}_profile.json`
+  const classes = useStyles()
 
   React.useEffect(() => {
     dispatch(fetchPlayerData(playerDataUrl))
@@ -86,78 +77,14 @@ function DetailPage (props) {
           </Card>
         </Grid>
         <Grid container item xs={8}>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">Height:</Typography>
-                <Divider />
-                <Typography variant='h5' component="h6" className={classes.paperContent}>{player.heightFeet}' {player.heightInches}'' ({player.heightMeters}m)</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">Weight:</Typography>
-                <Divider />
-                <Typography variant='h5' align="center" component="h6">{player.weightPounds}lbs ({player.weightKilograms}kg)</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">Country:</Typography>
-                <Divider />
-                <Typography variant='h5' align="center" component="h6">{player.country}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">College:</Typography>
-                <Divider />
-                <Typography variant='h5' align="center" component="h6">{player.collegeName}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">Age:</Typography>
-                <Divider />
-                <Typography variant='h5' align="center" component="h6">{Number(today.format('YYYY')) - Number(player.dateOfBirthUTC.slice(0,4))} years</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">Birthdate:</Typography>
-                <Divider />
-                <Typography variant='h5' align="center" component="h6">{moment(player.dateOfBirthUTC).format('DD MMMM YYYY')}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">Draft:</Typography>
-                <Divider />
-                <Typography variant='h5' align="center" component="h6">{player.draft.pickNum === "" ? "Undrafted" : `${player.draft.seasonYear} R${player.draft.roundNum} Pick ${player.draft.pickNum}`}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={3} className={classes.root}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Typography variant='h6' align="center" component="h3">Experience:</Typography>
-                <Divider />
-                <Typography variant='h5' align="center" component="h6">{player.nbaDebutYear === "2020" ? "Rookie" : `${2020 - Number(player.nbaDebutYear)} years`}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          <PlayerDetailPaper title={'Height:'} content={`${player.heightFeet}' ${player.heightInches}'' (${player.heightMeters}m)`}/>
+          <PlayerDetailPaper title={'Weight:'} content={`${player.weightPounds}lbs (${player.weightKilograms}kg)`}/>
+          <PlayerDetailPaper title={'Country:'} content={player.country}/>
+          <PlayerDetailPaper title={'College:'} content={player.collegeName}/>
+          <PlayerDetailPaper title={'Age:'} content={`${Number(today.format('YYYY')) - Number(player.dateOfBirthUTC.slice(0,4))} years`} />
+          <PlayerDetailPaper title={'Birthdate:'} content={moment(player.dateOfBirthUTC).format('DD MMMM YYYY')}/>
+          <PlayerDetailPaper title={'Draft:'} content={player.draft.pickNum === "" ? "Undrafted" : `${player.draft.seasonYear} R${player.draft.roundNum} Pick ${player.draft.pickNum}`}/>
+          <PlayerDetailPaper title={'Experience:'} content={player.nbaDebutYear === "2020" ? "Rookie" : `${2020 - Number(player.nbaDebutYear)} years`}/>
         </Grid>
         <Container>
           <img src={`https://www.nba.com/stats/media/img/teams/logos/${team.tricode}_logo.svg`}/>
