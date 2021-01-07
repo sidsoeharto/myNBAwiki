@@ -34,9 +34,9 @@ function HomePage (props) {
   return (
     <React.Fragment>
       <Grid container spacing={3}>
-        {currentPlayers.map(player => <Grid item xs={3}><PlayerCard key={player.personId} player={player} team={renderTeam(player, teams)}/></Grid>)}
+        {currentPlayers.filter(player => player.isActive === true).map(player => <Grid item xs={3}><PlayerCard key={player.personId} player={player} team={renderTeam(player, teams)}/></Grid>)}
       </Grid>
-      <Pagination count={50} page={currentPage} onChange={handleChange} />
+      <Pagination count={42} page={currentPage} onChange={handleChange} />
     </React.Fragment>
   )
 }
