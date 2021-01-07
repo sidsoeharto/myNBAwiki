@@ -18,6 +18,6 @@ export function addFavorite (player) {
   return { type: "ADD_FAVORITE", payload: player }
 }
 
-export function removeFavorite () {
-  return { type: "REMOVE_FAVORITE" }
+export function removeFavorite (payload) {
+  return { type: "REMOVE_FAVORITE", payload: payload }
 }

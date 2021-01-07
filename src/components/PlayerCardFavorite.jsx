@@ -1,13 +1,26 @@
 import React from 'react';
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
-import { removeFavorite } from '../store/actions';
 import { useDispatch } from 'react-redux';
+import { setPlayer, setPlayerTeam, removeFavorite } from '../store/actions';
+import { useHistory } from 'react-router-dom';
 
 function PlayerCardFavorite (props) {
+  let history = useHistory()
 
-  React.useEffect(() => {
-    console.log(props.favorite)
-  }, [])
+  const dispatch = useDispatch()
+
+  function handleClick (player, e) {
+    dispatch(setPlayer(player.personId))
+    dispatch(setPlayerTeam(player.teamId))
+    history.push({
+      pathname:`/player/${player.personId}`,
+    })
+  }
+
+  function clickToRemove (player) {
+    console.log('remove', player)
+    dispatch(removeFavorite(player))
+  }
 
   return (
     <Card>
@@ -31,10 +44,10 @@ function PlayerCardFavorite (props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={() => clickToRemove(props.favorite)}>
           Remove From Favorites
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={(e) => handleClick(props.favorite, e)}>
           Learn More
         </Button>
       </CardActions>

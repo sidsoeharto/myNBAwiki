@@ -52,7 +52,7 @@ function DetailPage (props) {
   React.useEffect(() => {
     console.log(id)
     dispatch(setPlayer(id))
-  }, [])
+  }, [dispatch])
 
   const player = useSelector(state => state.player)
   const teams = useSelector(state => state.teams)
@@ -107,7 +107,7 @@ function DetailPage (props) {
                 {player.firstName + ' ' + player.lastName}
               </Typography>
               <Typography variant="h6" color="textSecondary" component="h6" align="center">
-                {/* {team.fullName} | #{player.jersey} | {player.teamSitesOnly.posFull} */}
+                {team.fullName} | #{player.jersey} | {player.teamSitesOnly.posFull}
               </Typography>
             </CardContent>
             <CardMedia
