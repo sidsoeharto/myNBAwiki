@@ -19,7 +19,7 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/players/:teamId" exact>
+          <Route path="/roster/:teamId" exact>
             <Team />
           </Route>
           <Route path="/player/:id">

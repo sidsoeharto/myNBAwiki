@@ -7,8 +7,8 @@ import PlayerCard from '../components/PlayerCard';
 import { useSelector, useDispatch } from 'react-redux';
 
 function HomePage (props) {
-  const players = useSelector(state => state.players)
-  const teams = useSelector(state => state.teams)
+  const players = useSelector(state => state.player.players)
+  const teams = useSelector(state => state.team.teams)
 
   const [currentPage, setCurrentPage] = React.useState(1)
   const [playersPerPage, setPlayersPerPage] = React.useState(12)

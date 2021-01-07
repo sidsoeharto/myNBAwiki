@@ -85,14 +85,18 @@ class Navbar extends Component {
             <img src="https://www.iconarchive.com/download/i103841/blackvariant/button-ui-requests-13/NBA.ico" className={classes.logo}/>
           </IconButton>
           <Typography variant="h6" className={classes.title} variant="h6" noWrap>
-            NBAWiki
+            myNBAWiki
           </Typography>
           <Button color="inherit" className={classes.menuButton}>
             <Link to="/" style={{ textDecoration: 'none' }}>
               All Players
             </Link>
           </Button>
-          <Button color="inherit" className={classes.menuButton}>Players by Team</Button>
+          <Button color="inherit" className={classes.menuButton}>
+            <Link to="/roster" style={{ textDecoration: 'none' }}>
+              Players by Team
+            </Link>
+          </Button>
           <Button color="inherit" className={classes.menuButton}>
             <Link to="/favorites" style={{ textDecoration: 'none' }}>
               Favorite Players

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPlayers } from '../store/actions.js'
 
 function useFetchPlayers(url) {
-  const players = useSelector(state => state.players)
+  const players = useSelector(state => state.player.players)
   const dispatch = useDispatch()
 
   const template = require('nba-client-template')

@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 
 function FavoritesPage () {
 
-  const favorites = useSelector(state => state.favorites)
-  const teams = useSelector(state => state.teams)
+  const favorites = useSelector(state => state.favorite.favorites)
+  const teams = useSelector(state => state.team.teams)
 
   function renderTeam (player, teams) {
     let renderedTeam = {}
