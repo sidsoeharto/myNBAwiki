@@ -17,7 +17,7 @@ function reducer ( state = initialState, action ) {
     case "SET_TEAMS": 
       return {...state, teams: action.payload }
     case "SET_PLAYER_TEAM":
-      return {...state, playerTeam: action.payload }
+      return {...state, playerTeam: state.teams.find(team => team.teamId === action.payload) }
     case "ADD_FAVORITE":
       return {...state, favorites: state.favorites.concat(action.payload)}
     case "REMOVE_FAVORITE":

@@ -55,6 +55,8 @@ function DetailPage (props) {
   }, [])
 
   const player = useSelector(state => state.player)
+  const teams = useSelector(state => state.teams)
+  const team = useSelector(state => state.playerTeam)
 
   const today = moment()
 
@@ -92,6 +94,7 @@ function DetailPage (props) {
 
   React.useEffect(() => {
     fetchPlayerData();
+    console.log(team)
   } ,[])
 
   return (
@@ -189,7 +192,7 @@ function DetailPage (props) {
           </Grid>
         </Grid>
         <Container>
-          {/* <img src={`https://www.nba.com/stats/media/img/teams/logos/${team.tricode}_logo.svg`}/> */}
+          <img src={`https://www.nba.com/stats/media/img/teams/logos/${team.tricode}_logo.svg`}/>
           <TableContainer>
             <Table>
               <TableHead>

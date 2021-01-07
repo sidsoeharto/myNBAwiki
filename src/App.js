@@ -3,15 +3,12 @@ import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-d
 import Navbar from './components/Navbar'
 import { Home, About, Team, Detail, Favorites } from './views'
 import { CssBaseline } from '@material-ui/core';
+import useFetchPlayers from './hooks/useFetchPlayers';
+import useFetchTeams from './hooks/useFetchTeams';
 
 function App() {
-  const [players, setPlayers] = React.useState([])
-  const [team, setTeam] = React.useState([])
-
-  function handleClickPlayer (dataPlayer, dataTeam) {
-    setPlayers(dataPlayer)
-    setTeam(dataTeam)
-  }
+  const [players] = useFetchPlayers('http://data.nba.net/data/10s/prod/v1/2020/players.json')
+  const [teams] = useFetchTeams('http://data.nba.net/data/10s/prod/v1/2020/teams.json')
 
   return (
     <div className="App">
@@ -20,13 +17,13 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/" exact>
-            <Home handleClickPlayer={handleClickPlayer}/>
+            <Home />
           </Route>
           <Route path="/players/:teamId" exact>
             <Team />
           </Route>
           <Route path="/player/:id">
-            <Detail players={players} team={team}/>
+            <Detail />
           </Route>
           <Route path="/favorites">
             <Favorites />

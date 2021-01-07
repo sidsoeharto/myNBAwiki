@@ -6,12 +6,12 @@ export function setPlayer (payload) {
   return { type: "SET_PLAYER", payload: payload }
 }
 
-export function setTeams () {
-  return { type: "SET_TEAMS" }
+export function setTeams (payload) {
+  return { type: "SET_TEAMS", payload: payload }
 }
 
-export function setPlayerTeam () {
-  return { type: "SET_PLAYER_TEAM" }
+export function setPlayerTeam (payload) {
+  return { type: "SET_PLAYER_TEAM", payload: payload }
 }
 
 export function addFavorite (player) {
