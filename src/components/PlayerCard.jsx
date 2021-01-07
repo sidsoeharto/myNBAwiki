@@ -4,9 +4,12 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typo
 import { useSelector, useDispatch } from 'react-redux';
 import { setPlayer, setPlayerTeam } from '../store/actions';
 import { addFavorite } from '../store/actions';
+import { toast } from 'react-toastify';
 
 function PlayerCard (props) {
   let history = useHistory()
+
+  const favorites = useSelector(state => state.favorite.favorites)
 
   const dispatch = useDispatch()
   
@@ -19,8 +22,11 @@ function PlayerCard (props) {
   }
 
   function clickToAdd (player) {
-    console.log(player)
-    dispatch(addFavorite(player))
+    if (!favorites.some(el => el.personId === player.personId)) {
+      dispatch(addFavorite(player))
+    } else {
+      toast.error('Already added to Favorites')
+    }
   }
 
   return (
