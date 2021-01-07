@@ -45,7 +45,7 @@ function DetailPage (props) {
   const dispatch = useDispatch()
   let { id } = useParams()
   const classes = useStyles()
-  const playerDataUrl = `http://data.nba.net/data/10s/prod/v1/2020/players/${id}_profile.json`
+  const playerDataUrl = `https://data.nba.net/data/10s/prod/v1/2020/players/${id}_profile.json`
 
   React.useEffect(() => {
     dispatch(fetchPlayerData(playerDataUrl))

@@ -54,10 +54,10 @@ export const fetchRoster = () => (dispatch, getState) => {
       Referer: template.referrer,
       Connection: "keep-alive",
       "Cache-Control": "no-cache",
-      Origin: "http://stats.nba.com",
+      Origin: "https://stats.nba.com",
     }
   }
-  fetch(`http://data.nba.net/data/10s/prod/v1/2020/teams/${rosterTeam.urlName}/roster.json`)
+  fetch(`https://data.nba.net/data/10s/prod/v1/2020/teams/${rosterTeam.urlName}/roster.json`)
     .then(response => response.json())
     .then(data => {
       console.log(data.league.standard.players)
@@ -79,7 +79,7 @@ export const fetchPlayerData = (url) => (dispatch, getState) => {
       Referer: template.referrer,
       Connection: "keep-alive",
       "Cache-Control": "no-cache",
-      Origin: "http://stats.nba.com",
+      Origin: "https://stats.nba.com",
     }
   }
   fetch(url, options)

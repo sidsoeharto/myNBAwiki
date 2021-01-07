@@ -7,8 +7,8 @@ import useFetchPlayers from './hooks/useFetchPlayers';
 import useFetchTeams from './hooks/useFetchTeams';
 
 function App() {
-  useFetchPlayers('http://data.nba.net/data/10s/prod/v1/2020/players.json')
-  useFetchTeams('http://data.nba.net/data/10s/prod/v1/2020/teams.json')
+  useFetchPlayers('https://data.nba.net/data/10s/prod/v1/2020/players.json')
+  useFetchTeams('https://data.nba.net/data/10s/prod/v1/2020/teams.json')
 
   return (
     <div className="App">

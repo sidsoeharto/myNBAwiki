@@ -16,7 +16,7 @@ function useFetchPlayers(url) {
       Referer: template.referrer,
       Connection: "keep-alive",
       "Cache-Control": "no-cache",
-      Origin: "http://stats.nba.com",
+      Origin: "https://stats.nba.com",
     }
   }
 
