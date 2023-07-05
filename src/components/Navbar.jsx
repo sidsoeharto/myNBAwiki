@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { fade, withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, Button, InputBase } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Button, InputBase} from '@material-ui/core';
+import { useMediaQuery, useTheme } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import NavbarDrawer from './NavbarDrawer';
+import { colors } from '../styles/theme';
 
 const styles = theme => ({
   grow: {
@@ -19,46 +22,11 @@ const styles = theme => ({
       display: 'block',
     },
     marginRight: theme.spacing(3),
+    fontFamily: 'Oswald, sans-serif',
+    fontSize: '1.2rem'
   },
   logo: {
     height: '44px'
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
   },
   sectionDesktop: {
     display: 'none',
@@ -74,51 +42,52 @@ const styles = theme => ({
   }
 })
 
-class Navbar extends Component {
-  render() {
-    const { classes } = this.props
+function Navbar (props) {
+  const { classes } = props
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-    return (
-      <AppBar position="static">
-        <Toolbar>
+  return (
+    <AppBar position="fixed" style={{backgroundColor: colors.nbaNavy}}>
+      <Toolbar sx={{justifyContent: 'space-between'}}>
+        <Link to="/" style={{flexDirection: 'row', flexGrow: 1, display: 'inline-flex', alignItems: 'center', textDecoration: 'none', color: 'white'}}>
           <IconButton edge="start" color="inherit">
-            <img src="https://www.iconarchive.com/download/i103841/blackvariant/button-ui-requests-13/NBA.ico" className={classes.logo}/>
+            <img src="https://www.iconarchive.com/download/i103841/blackvariant/button-ui-requests-13/NBA.ico" alt="myNBAwiki" className={classes.logo}/>
           </IconButton>
-          <Typography variant="h6" className={classes.title} variant="h6" noWrap>
+          <Typography variant="h6" className={classes.title} noWrap>
             myNBAWiki
           </Typography>
-          <Button color="inherit" className={classes.menuButton}>
-            <Link to="/" style={{ textDecoration: 'none' }}>
-              All Players
-            </Link>
-          </Button>
-          <Button color="inherit" className={classes.menuButton}>
-            <Link to="/roster" style={{ textDecoration: 'none' }}>
-              Players by Team
-            </Link>
-          </Button>
-          <Button color="inherit" className={classes.menuButton}>
-            <Link to="/favorites" style={{ textDecoration: 'none' }}>
-              Favorite Players
-            </Link>
-          </Button>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase 
-              placeholder="Search"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
-    )
-  }
+        </Link>
+        {
+          isMobile ?
+          <NavbarDrawer />
+          :
+          <>
+            <Button color="inherit" className={classes.menuButton}>
+              <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                Players
+              </Link>
+            </Button>
+            <Button color="inherit" className={classes.menuButton}>
+              <Link to="/roster" style={{ textDecoration: 'none', color: 'white' }}>
+                Teams
+              </Link>
+            </Button>
+            <Button color="inherit" className={classes.menuButton}>
+              <Link to="/schedule" style={{ textDecoration: 'none', color: 'white' }}>
+                Schedule
+              </Link>
+            </Button>
+            <Button color="inherit" className={classes.menuButton}>
+              <Link to="/favorites" style={{ textDecoration: 'none', color: 'white' }}>
+                Favorite
+              </Link>
+            </Button>
+          </>
+        }
+      </Toolbar>
+    </AppBar>
+  )
 }
 
 Navbar.propTypes = {

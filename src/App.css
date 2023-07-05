@@ -1,3 +1,8 @@
+*, :after, :before {
+  box-sizing: border-box;
+  border: 0 solid;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +40,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.MuiCardMedia-img {
+  height: 160px;
 }

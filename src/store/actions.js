@@ -30,12 +30,16 @@ export function setRoster (payload) {
   return { type: "SET_ROSTER", payload: payload }
 }
 
-export function setPlayerDataRegular (payload) {
-  return { type: "SET_PLAYERDATA_REGULAR", payload: payload }
+export function setPlayerDataHeadline (payload) {
+  return { type: "SET_PLAYERDATA_HEADLINESTATS", payload: payload }
 }
 
-export function setPlayerDataLatest (payload) {
-  return { type: "SET_PLAYERDATA_LATEST", payload: payload }
+export function setPlayerDataBio (payload) {
+  return { type: "SET_PLAYERDATA_BIO", payload: payload }
+}
+
+export function setPlayerDataStats (payload) {
+  return { type: "SET_PLAYERDATA_STATS", payload: payload }
 }
 
 export function setPlayerDataSummary (payload) {
@@ -85,10 +89,9 @@ export const fetchPlayerData = (url) => (dispatch, getState) => {
   fetch(url, options)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.league.standard.stats)
-      dispatch(setPlayerDataSummary(data.league.standard.stats.careerSummary))
-      dispatch(setPlayerDataRegular(data.league.standard.stats.regularSeason.season))
-      dispatch(setPlayerDataLatest(data.league.standard.stats.latest))
+      dispatch(setPlayer(data.player))
+      dispatch(setPlayerDataBio(data.bio))
+      dispatch(setPlayerDataStats(data.stats))
     })
     .catch((err) => {
       console.log('from action', err.message)

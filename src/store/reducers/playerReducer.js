@@ -8,7 +8,7 @@ function playerReducer ( state = initialState, action ) {
     case "SET_PLAYERS":
       return {...state, players: action.payload }
     case "SET_PLAYER": 
-      return {...state, player: state.players.find(player => player.personId === action.payload)}
+      return {...state, player: action.payload }
     default:
       return {...state}
   }

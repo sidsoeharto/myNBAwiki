@@ -1,37 +1,35 @@
 import React from 'react';
 import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
-import { Home, About, Team, Detail, Favorites } from './views'
+import { PlayerList, About, Team, PlayerDetail, Favorites } from './views'
 import { CssBaseline } from '@material-ui/core';
-import useFetchPlayers from './hooks/useFetchPlayers';
-import useFetchTeams from './hooks/useFetchTeams';
+import { MainContent } from './App.styles';
 
 function App() {
-  useFetchPlayers('https://data.nba.net/data/10s/prod/v1/2020/players.json')
-  useFetchTeams('https://data.nba.net/data/10s/prod/v1/2020/teams.json')
-
   return (
     <div className="App">
       <Router>
         <CssBaseline />
         <Navbar />
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/roster/:teamId" exact>
-            <Team />
-          </Route>
-          <Route path="/player/:id">
-            <Detail />
-          </Route>
-          <Route path="/favorites">
-            <Favorites />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-        </Switch>
+        <MainContent>
+          <Switch>
+            <Route path="/" exact>
+              <PlayerList />
+            </Route>
+            <Route path="/roster/:teamId" exact>
+              <Team />
+            </Route>
+            <Route path="/player/:id">
+              <PlayerDetail />
+            </Route>
+            <Route path="/favorites">
+              <Favorites />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+          </Switch>
+        </MainContent>
       </Router>
     </div>
   );
